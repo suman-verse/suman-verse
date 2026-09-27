@@ -73,8 +73,11 @@ export const Hero = () => {
     >
       <div className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden">
         <img
-          src="/hero-bg.png"
+          src="/hero-bg.webp"
           alt="Hero Background"
+          width="736"
+          height="414"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center opacity-90 dark:opacity-30 dark:brightness-[0.45] dark:contrast-125 transition-all duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F3] dark:from-black via-transparent to-transparent" />
@@ -82,7 +85,7 @@ export const Hero = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 lg:px-12">
         <div className="max-w-5xl" itemScope itemType="https://schema.org/Person">
-          <div className="reveal" data-delay="0">
+          <div className="hero-fade-in">
             <h1 className="font-serif text-[clamp(2.1rem,8vw,7rem)] leading-[1.08] tracking-[-0.03em] text-[#1A1A1A] dark:text-[#EAEAEA] font-normal" itemProp="name">
               Suman Verse.
               <br />
@@ -90,14 +93,14 @@ export const Hero = () => {
             </h1>
           </div>
 
-          <div className="reveal" data-delay="80">
+          <div className="hero-fade-in" style={{ animationDelay: '80ms' }}>
             <p className="speakable-intro mt-8 max-w-[68ch] font-sans text-base sm:text-lg md:text-xl leading-[1.65] text-[#6B6B68] dark:text-[#9A9A97] font-normal" itemProp="description">
               Hi, I'm Suman. I am a passionate Frontend Web Developer crafting fast, responsive, and visually engaging web applications with modern UI design principles. Engineering digital experiences that blur the line between
               <TypewriterWord />
             </p>
           </div>
 
-          <div className="reveal mt-10 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-6" data-delay="160">
+          <div className="hero-fade-in mt-10 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-6" style={{ animationDelay: '160ms' }}>
             <a
               href="#projects"
               className="inline-flex items-center gap-2.5 rounded-full bg-[#002FA7] dark:bg-[#2563EB] px-7 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:opacity-90 hover:shadow-lg hover:shadow-[#002FA7]/25 active:scale-95 cursor-pointer"
@@ -121,7 +124,7 @@ export const Hero = () => {
             </button>
           </div>
 
-          <div className="reveal mt-16 sm:mt-20 grid grid-cols-2 gap-6 border-t border-[#DDDDDA] dark:border-[#2A2A2A] pt-8 font-mono sm:grid-cols-4 sm:gap-8" data-delay="240">
+          <div className="hero-fade-in mt-16 sm:mt-20 grid grid-cols-2 gap-6 border-t border-[#DDDDDA] dark:border-[#2A2A2A] pt-8 font-mono sm:grid-cols-4 sm:gap-8" style={{ animationDelay: '240ms' }}>
             <div>
               <div className="text-2xl md:text-3xl font-semibold text-[#1A1A1A] dark:text-[#EAEAEA]">
                 2y+
@@ -201,8 +204,12 @@ export const Hero = () => {
 
             <div className="bg-white p-3 rounded-2xl shadow-inner border border-slate-200 mx-auto max-w-[240px]">
               <img
-                src="/coffee_qr.png"
+                src="/coffee_qr.webp"
                 alt="UPI QR Code - Suman Kundu"
+                width="216"
+                height="216"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto rounded-xl object-contain block"
               />
             </div>

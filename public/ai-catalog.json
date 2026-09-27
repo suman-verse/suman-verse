@@ -1,0 +1,35 @@
+{
+  "$schema": "https://agenticresourcediscovery.org/schemas/v1/ai-catalog.json",
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Suman Verse",
+    "identifier": "https://sumanverse.com",
+    "documentationUrl": "https://sumanverse.com/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:sumanverse:agent:portfolio-assistant",
+      "displayName": "Suman Verse Portfolio & Developer Profile",
+      "type": "text/markdown",
+      "url": "https://sumanverse.com/llms.txt",
+      "description": "Comprehensive developer profile, technical skills, production case studies, and engineering services offered by Suman.",
+      "representativeQueries": [
+        "Who is Suman?",
+        "What are Suman's frontend skills and React experience?",
+        "Show me case studies and projects built by Suman",
+        "How can I contact or hire Suman for web development?"
+      ]
+    },
+    {
+      "identifier": "urn:ai:sumanverse:agent:promptforge",
+      "displayName": "PromptForge AI Directives",
+      "type": "text/html",
+      "url": "https://promtforge-seven.vercel.app/",
+      "description": "Production prompt engineering and LLM system directives optimizer for GPT-4o, Claude 3.5, and Gemini workflows.",
+      "representativeQueries": [
+        "Optimize my system prompt",
+        "Test AI directives for Claude or GPT"
+      ]
+    }
+  ]
+}

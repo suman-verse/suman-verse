@@ -46,25 +46,27 @@ export const Footer = () => {
           <img
             src="/logo.png"
             alt="Suman Verse Logo"
+            width="36"
+            height="36"
             className="w-9 h-9 object-contain drop-shadow-sm"
           />
           <div>
             <p className="text-sm font-semibold font-serif text-[#0F172A] dark:text-[#F8FAFC]">Suman Verse — Frontend Developer</p>
-            <p className="text-[10px] font-mono text-[#0F172A]/40 dark:text-[#F8FAFC]/40">© {new Date().getFullYear()} · All rights reserved</p>
+            <p className="text-[10px] font-mono text-[#475569] dark:text-[#94A3B8]">© {new Date().getFullYear()} · All rights reserved</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-[#1E293B] border border-[#0F2C59]/08 dark:border-white/10 text-[11px] font-mono text-[#0F2C59]/55 dark:text-white/70">
+        <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-[#1E293B] border border-[#0F2C59]/15 dark:border-white/15 text-[11px] font-mono text-[#334155] dark:text-[#E2E8F0] font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
           Available for Hire · {time || '12:00:00 AM'}
         </div>
 
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={`flex items-center gap-2 text-xs font-semibold text-[#0F172A]/60 dark:text-[#F8FAFC]/60 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-all duration-300 group ${showTop ? 'opacity-100' : 'opacity-40'}`}
+          className={`flex items-center gap-2 text-xs font-semibold text-[#334155] dark:text-[#E2E8F0] hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-all duration-300 group ${showTop ? 'opacity-100' : 'opacity-40'}`}
         >
           Back to top
-          <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1E293B] border border-[#0F2C59]/08 dark:border-white/10 group-hover:bg-[#2563EB] group-hover:border-[#2563EB] group-hover:text-white flex items-center justify-center transition-all duration-300">
+          <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1E293B] border border-[#0F2C59]/15 dark:border-white/15 group-hover:bg-[#2563EB] group-hover:border-[#2563EB] group-hover:text-white flex items-center justify-center transition-all duration-300">
             <ArrowUp className="w-4 h-4" />
           </div>
         </button>

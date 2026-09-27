@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { useAntiDevTools } from './hooks/useAntiDevTools';
 import { useDocumentMetadata } from './hooks/useDocumentMetadata';
@@ -10,7 +10,10 @@ import { InteractiveSkills } from './components/InteractiveSkills';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { AllProjectsPage } from './components/AllProjectsPage';
+
+const AllProjectsPage = lazy(() =>
+  import('./components/AllProjectsPage').then((m) => ({ default: m.AllProjectsPage }))
+);
 
 export function App() {
   useScrollReveal();
@@ -49,11 +52,13 @@ export function App() {
 
   if (isAllProjects) {
     return (
-      <AllProjectsPage
-        onBack={() => {
-          window.location.hash = '#projects';
-        }}
-      />
+      <Suspense fallback={<div className="min-h-screen bg-white dark:bg-black" />}>
+        <AllProjectsPage
+          onBack={() => {
+            window.location.hash = '#projects';
+          }}
+        />
+      </Suspense>
     );
   }
 

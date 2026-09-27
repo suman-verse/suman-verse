@@ -25,7 +25,6 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F5F3" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
     <meta name="color-scheme" content="light dark" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -36,6 +35,7 @@
 
     <link rel="alternate" type="text/plain" href="https://sumanverse.com/llms.txt" title="LLM context file (llms.txt)" />
     <link rel="alternate" type="text/plain" href="https://sumanverse.com/llms-full.txt" title="Exhaustive LLM context file (llms-full.txt)" />
+    <link rel="alternate" type="application/json" href="https://sumanverse.com/ai-catalog.json" title="Agent Resource Discovery (ai-catalog.json)" />
 
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://sumanverse.com/" />
@@ -410,18 +410,20 @@
     </script>
 
     <link rel="dns-prefetch" href="//api.fontshare.com" />
+    <link rel="dns-prefetch" href="//cdn.fontshare.com" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//api.web3forms.com" />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
-      rel="preload"
-      as="style"
+      rel="stylesheet"
       href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=monument-extended@400,700,800&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      media="print"
+      onload="this.media='all'"
     />
     <noscript>
       <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=monument-extended@400,700,800&display=swap" />

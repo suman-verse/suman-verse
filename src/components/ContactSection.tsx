@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react';
 import { Send, CheckCircle2, Mail, ArrowRight, Phone } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 const BUDGETS = ['< $5k', '$5k–$10k', '$10k–$25k', '$25k+'];
 
@@ -80,6 +79,7 @@ export const ContactSection = () => {
       }
 
       setSubmitted(true);
+      const confetti = (await import('canvas-confetti')).default;
       confetti({
         particleCount: 120,
         spread: 90,
@@ -108,7 +108,7 @@ export const ContactSection = () => {
           <div className="lg:col-span-5 space-y-8">
             <div className="reveal">
               <div className="flex items-center gap-2 mb-2">
-                <img src="/logo.png" alt="Suman Verse Logo" className="w-6 h-6 object-contain drop-shadow-xs" />
+                <img src="/logo.png" alt="Suman Verse Logo" width="24" height="24" className="w-6 h-6 object-contain drop-shadow-xs" />
                 <p className="section-label !mb-0">Start a Conversation</p>
               </div>
               <h2 className="font-monument text-[clamp(1.8rem,4vw,3.2rem)] text-[#0F172A] dark:text-[#F8FAFC] leading-[1.05] tracking-tight uppercase">

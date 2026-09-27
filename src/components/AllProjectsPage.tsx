@@ -203,6 +203,8 @@ function ProjectCard({ project, isActive, onOpen }: { project: ProjectData; isAc
             <img
               src={project.image}
               alt={project.title}
+              width="600"
+              height="338"
               onLoad={() => setImgLoaded(true)}
               className={`w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
               loading="lazy"
@@ -228,7 +230,7 @@ function ProjectCard({ project, isActive, onOpen }: { project: ProjectData; isAc
         <div className="space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-[#0F2C59]/50 dark:text-[#F8FAFC]/50 mb-1">{project.year} · {project.client}</p>
+              <p className="text-[10px] font-mono uppercase tracking-wider text-[#475569] dark:text-[#94A3B8] font-medium mb-1">{project.year} · {project.client}</p>
               <h3 className="font-monument text-base sm:text-lg text-[#0F172A] dark:text-[#F8FAFC] leading-snug line-clamp-2">
                 {project.title}
               </h3>
@@ -262,7 +264,7 @@ function ProjectCard({ project, isActive, onOpen }: { project: ProjectData; isAc
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#60A5FA] text-[11px] font-mono font-semibold hover:bg-[#2563EB] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/15 dark:bg-[#2563EB]/30 text-[#1D4ED8] dark:text-[#93C5FD] text-[11px] font-mono font-bold hover:bg-[#2563EB] hover:text-white transition-colors"
               >
                 <span>{project.demoUrl.includes('releases') ? 'Download v1' : 'Visit Live'}</span>
                 <ExternalLink className="w-3 h-3" />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
@@ -6,10 +6,17 @@ const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const update = () => {
-      const scrolled = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(total > 0 ? (scrolled / total) * 100 : 0);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          setProgress(total > 0 ? (scrolled / total) * 100 : 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener('scroll', update, { passive: true });
     return () => window.removeEventListener('scroll', update);
@@ -20,6 +27,7 @@ const ScrollProgress = () => {
       className="scroll-progress"
       style={{ width: `${progress}%` }}
       role="progressbar"
+      aria-label="Reading progress"
       aria-valuenow={Math.round(progress)}
       aria-valuemin={0}
       aria-valuemax={100}
@@ -53,26 +61,26 @@ export const Navbar = () => {
 
   const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
 
-  const handleScroll = useCallback(() => {
-    const sections = ['hero', 'projects', 'skills', 'about'];
-    const offset = window.innerHeight * 0.35;
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (el) {
-        const { top, bottom } = el.getBoundingClientRect();
-        if (top <= offset && bottom > offset) {
-          setActiveSection(id);
-          break;
-        }
-      }
-    }
-  }, []);
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    const sections = ['hero', 'projects', 'skills', 'about'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -146,6 +154,8 @@ export const Navbar = () => {
           <img
             src="/logo.png"
             alt="Suman Verse Logo"
+            width="28"
+            height="28"
             className="w-7 h-7 object-contain drop-shadow-sm"
           />
           <span className="text-sm font-bold font-serif text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">

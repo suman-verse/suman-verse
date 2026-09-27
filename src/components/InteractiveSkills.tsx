@@ -121,9 +121,9 @@ export const InteractiveSkills = () => {
                     <span className="inline-block px-2.5 py-1 rounded-md bg-[#2563EB]/08 dark:bg-[#2563EB]/20 border border-[#2563EB]/20 text-[#2563EB] dark:text-[#60A5FA] font-mono text-[10px] font-semibold uppercase tracking-wider mb-2.5">
                       {skill.level}
                     </span>
-                    <h4 className="font-monument text-base text-[#0F172A] dark:text-[#F8FAFC] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors leading-tight">
+                    <h3 className="font-monument text-base text-[#0F172A] dark:text-[#F8FAFC] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors leading-tight">
                       {skill.name}
-                    </h4>
+                    </h3>
                   </div>
                   <div className={`w-2 h-2 rounded-full mt-2 shrink-0 transition-colors duration-300 ${hovered === skill.name ? 'bg-[#2563EB]' : 'bg-[#0F2C59]/20 dark:bg-white/20'
                     }`} />
