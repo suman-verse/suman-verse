@@ -28,7 +28,7 @@ export const Footer = () => {
 
   return (
     <footer className="relative border-t border-[#0F2C59]/08 dark:border-white/10 overflow-hidden">
-      <div className="py-4 border-b border-[#0F2C59]/06 dark:border-white/10 bg-white dark:bg-[#0B0F17] overflow-hidden">
+      <div className="py-4 border-b border-[#0F2C59]/06 dark:border-white/10 bg-white dark:bg-black overflow-hidden">
         <div className="flex">
           <div className="marquee-track flex items-center gap-0 shrink-0">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
@@ -44,12 +44,12 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <img
-            src="/favicon.png"
-            alt="Suman Logo"
-            className="w-8 h-8 rounded-xl object-cover border border-[#0F2C59]/10 dark:border-white/10 shadow-xs"
+            src="/logo.png"
+            alt="Suman Verse Logo"
+            className="w-9 h-9 object-contain drop-shadow-sm"
           />
           <div>
-            <p className="text-sm font-semibold text-[#0F172A] dark:text-[#F8FAFC]">Suman — Frontend Developer</p>
+            <p className="text-sm font-semibold font-serif text-[#0F172A] dark:text-[#F8FAFC]">Suman Verse — Frontend Developer</p>
             <p className="text-[10px] font-mono text-[#0F172A]/40 dark:text-[#F8FAFC]/40">© {new Date().getFullYear()} · All rights reserved</p>
           </div>
         </div>

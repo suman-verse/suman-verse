@@ -1,228 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
-import { ArrowUpRight, ExternalLink, X, ChevronDown, CheckCircle, Code, ShieldCheck } from 'lucide-react';
-import type { ProjectData } from './ProjectModal';
-
-const projects: ProjectData[] = [
-  {
-    id: 'desun_hospital',
-    title: 'Desun Hospital — Healthcare Web Portal',
-    category: 'Healthcare',
-    subtitle: 'Superspeciality hospital digital portal with live doctor availability search, OPD consultation booking, robotic surgery showcase, and media newsroom.',
-    image: '/projects/desun_hospital/hero.png',
-    galleryImages: [
-      '/projects/desun_hospital/hero.png',
-      '/projects/desun_hospital/doctors.png',
-      '/projects/desun_hospital/media_corner.png',
-    ],
-    tags: ['React 19', 'Healthcare UI', 'Tailwind CSS', 'TypeScript', 'OPD Booking', 'Emergency Portal'],
-    summary: 'Engineered a modern, patient-first web portal for Desun Hospital (NABH & JCI Accredited Superspeciality Hospital). Features dual doctor and department lookup filters, real-time doctor OPD scheduling, instant consultation booking, dedicated robotic surgery showcase, emergency 24/7 hotline integration, and dynamic press release newsroom.',
-    outcome: 'Streamlined patient appointment booking, reducing phone queue wait times by 40% and increasing online doctor search engagement across Kolkata & East India regions.',
-    challenges: [
-      'Architecting a multi-faceted search filter engine for cross-referencing doctor specialities, OPD schedules, and department availability',
-      'Designing a trustworthy, accessible hospital visual hierarchy with high-contrast emergency banners and accreditation badges (NABH & JCI)',
-      'Building dynamic media newsroom and health blog modules with automated event tag categorisation and WhatsApp live agent integration',
-    ],
-    architecture: [
-      'Modular React & TypeScript component system with reusable search and doctor profile cards',
-      'Responsive Tailwind CSS design tokens optimized for clinical clarity, accessibility (WCAG AA), and emergency callouts',
-      'REST API abstraction layer connecting hospital management backend with front-end booking schedules',
-    ],
-    year: '2026',
-    client: 'Desun Hospital & Heart Institute',
-  },
-  {
-    id: 'aeroforce',
-    title: 'Aero Force — Tebex Webstore Template',
-    category: 'Gaming UI',
-    subtitle: 'Ultra-responsive Tebex webstore template featuring dynamic package catalogs, instant basket checkout, and live player stats.',
-    image: '/projects/aeroforce/hero.png',
-    galleryImages: [
-      '/projects/aeroforce/hero.png',
-      '/projects/aeroforce/categories.png',
-      '/projects/aeroforce/catalog.png',
-      '/projects/aeroforce/achievements.png',
-      '/projects/aeroforce/checkout.png',
-    ],
-    tags: ['React 19', 'Tebex API', 'Tailwind CSS', 'TypeScript', 'Framer Motion', 'Glassmorphism'],
-    summary: 'Engineered a high-converting dark-mode Tebex webstore template tailored for Minecraft and FiveM server networks. Features glowing neon accents, live online player counter status, interactive category filtering, recent order ticker, and seamless basket checkout flow.',
-    outcome: 'Powered 14,200+ completed store orders, serving 25,000+ total players with an average page load speed under 1.1 seconds.',
-    challenges: [
-      'Designing custom dark-mode neon glassmorphism UI design token system',
-      'Integrating real-time Tebex Basket REST API & live player status polling',
-      'Building dynamic package perk comparison modals with instant currency formatting',
-    ],
-    architecture: [
-      'Modular React component tree optimized for Tebex v2 API integration',
-      'Tailwind CSS design token system with glow backdrop-blur filters',
-      'Off-main-thread async data fetching & state caching layer for live order ticker',
-    ],
-    year: '2025',
-    client: 'Aero Force Network',
-  },
-  {
-    id: 'bluebz',
-    title: 'BLUEBZ — Floral Preservation & Resin Studio',
-    category: 'Editorial',
-    subtitle: 'Bespoke luxury editorial web experience for botanical resin art, floral preservation, and custom handcrafted keepsakes.',
-    image: '/projects/bluebz/transient_to_eternal.png',
-    galleryImages: [
-      '/projects/bluebz/transient_to_eternal.png',
-      '/projects/bluebz/preservation_process.jpg',
-      '/projects/bluebz/form_and_memory.jpg',
-    ],
-    tags: ['React 19', 'Tailwind CSS', 'Framer Motion', 'Canvas API', 'TypeScript', 'Luxury UX'],
-    summary: 'Crafted a museum-grade editorial website for BLUEBZ Resin Art. Features an interactive split-screen comparison slider ("Transient to Eternal") comparing fresh bridal bouquets against preserved resin artwork, ambient sound controls, a 4-step preservation process guide, and date reservation workflow.',
-    outcome: 'Achieved a 94% reservation conversion rate for wedding floral preservation bookings, increasing client session duration to 5m 20s.',
-    challenges: [
-      'Building an ultra-smooth touch & drag split-screen comparison slider for fresh vs preserved floral artwork',
-      'Designing an ethereal warm-toned editorial layout with serif typography and subtle ambient audio integrations',
-      'Creating a responsive 4-step preservation guide and curated keepsake catalog grid',
-    ],
-    architecture: [
-      'HTML5 Canvas & CSS clip-path split slider engine with 60 FPS touch pointer tracking',
-      'Web Audio API integration for subtle ambient sound playback toggles',
-      'Modular React grid system with progressive lazy loading for high-resolution floral photography',
-    ],
-    year: '2025',
-    client: 'BLUEBZ Resin Studio',
-  },
-  {
-    id: 'sharpness_sword',
-    title: 'Sharpness Sword — Minecraft Webstore UI',
-    category: 'Gaming UI',
-    subtitle: 'High-performance Minecraft server webstore template featuring live player stats, reactive cart modal, and package catalogs.',
-    image: '/projects/sharpness_sword/hero.jpg',
-    galleryImages: [
-      '/projects/sharpness_sword/hero.jpg',
-      '/projects/sharpness_sword/cart.jpg',
-      '/projects/sharpness_sword/catalog.jpg',
-    ],
-    tags: ['React 19', 'Tebex API', 'Tailwind CSS', 'TypeScript', 'Zustand', 'Minecraft UX'],
-    summary: 'Engineered a sleek dark-themed webstore for the Sharpness Sword Minecraft Network (sharpnesssword.net). Features live player statistics (2,400+ online, 150k+ registered), dynamic category sidebar filtering, real-time search indexing, multi-item cart drawer with creator discount codes, and seamless checkout flow.',
-    outcome: 'Delivered 50,000+ store purchases with 99.9% server uptime and sub-second catalog render times for thousands of active players.',
-    challenges: [
-      'Building a reactive multi-item cart drawer state manager with instant subtotal and tax calculation',
-      'Integrating live Minecraft server IP pinging and online player count status indicators',
-      'Creating category-filtered store catalog views with real-time search indexing',
-    ],
-    architecture: [
-      'Zustand state store for client-side shopping cart persistence & creator discount code validation',
-      'Optimized Tailwind CSS layout with dark navy palette & blue accent lighting tokens',
-      'Async REST API middleware for Tebex v2 checkout gateway integration',
-    ],
-    year: '2025',
-    client: 'Sharpness Sword MC Network',
-  },
-  {
-    id: 'nebula',
-    title: 'Nebula Guard — Security & Threat Dashboard',
-    category: 'Enterprise',
-    subtitle: 'Real-time threat telemetry dashboard featuring risk scoring gauges, virus analytics, and live device security logs.',
-    image: '/projects/nebula_dashboard.png',
-    tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Recharts', 'Framer Motion', 'Cybersecurity'],
-    summary: 'Engineered a next-gen dark-mode security operations dashboard (VertexGuard / Nebula) for enterprise threat telemetry. Features real-time risk score indicators (0-1000 scale), interactive monthly threat timeline analytics, virus classification breakdown, and live device threat logs.',
-    outcome: 'Accelerated SecOps incident response times by 48% across enterprise infrastructure networks monitoring 500k+ endpoints.',
-    challenges: [
-      'Rendering high-frequency threat stream data across SVG gauge meters and Recharts graphs without dropped frames',
-      'Designing an intuitive dark-mode purple & neon glassmorphism UI hierarchy for complex threat metrics',
-      'Building multi-device threat details tabular filtering with real-time risk escalation alerts',
-    ],
-    architecture: [
-      'Recharts SVG chart pipeline for dynamic monthly threat curves and virus distribution rings',
-      'Custom gauge component rendering real-time 0-1000 risk score recalculations',
-      'Optimized React state management for streaming threat log telemetry',
-    ],
-    demoUrl: '#',
-    githubUrl: '#',
-    year: '2025',
-    client: 'VertexGuard SecOps',
-  },
-  {
-    id: 'wardex_studio',
-    title: 'Wardex Studio — AI YouTube Thumbnail Editor',
-    category: 'Gaming UI',
-    subtitle: 'Browser-native YouTube thumbnail editor built for professional creators with AI subject cutout, layer styling, and 4K export.',
-    image: '/projects/wardex_studio/hero.png',
-    galleryImages: [
-      '/projects/wardex_studio/hero.png',
-      '/projects/wardex_studio/showcase.png',
-      '/projects/wardex_studio/library.png',
-    ],
-    tags: ['React 19', 'Canvas API', 'WebGL', 'Tailwind CSS', 'TypeScript', 'AI Cutout'],
-    summary: 'Architected a web-based YouTube thumbnail creation platform for Wardex Studio. Enables creators to perform automatic AI background cutouts, apply high-contrast vector outline strokes, drag-and-drop viral graphic assets, filter across content categories (Gaming, Tech, Reaction, Finance), and export 4K PNGs instantly without Photoshop.',
-    outcome: 'Trusted by 150,000+ gaming and tech creators, boosting client video CTR by an average of +12.8%.',
-    challenges: [
-      'Building an off-main-thread WebAssembly AI background matte extraction engine for sub-second subject cutouts',
-      'Implementing high-DPI HTML5 Canvas layer compositing with real-time text shadow & glow stroke rendering',
-      'Designing a high-converting web presentation experience with responsive template showcase grids',
-    ],
-    architecture: [
-      'Canvas API & WebGL fragment shader pipeline for GPU-accelerated layer adjustments (blur, contrast, brightness)',
-      'On-device AI segmentation model running via WebAssembly in WebWorkers',
-      'High-resolution 4K canvas rasterizer supporting multi-layer asset export',
-    ],
-    year: '2025',
-    client: 'Wardex Studio',
-  },
-  {
-    id: 'aetheria',
-    title: 'Aetheria — Institutional Terminal',
-    category: 'Enterprise',
-    subtitle: 'Real-time liquidity analytics & spatial trading interface for digital asset portfolios.',
-    image: '/projects/fintech_luxury.png',
-    tags: ['Next.js', 'Canvas API', 'WebSockets', 'GSAP', 'Zustand'],
-    summary: 'Designed and built a ultra-low-latency financial dashboard processing over 50,000 live tick updates per second with zero UI frame drops or main-thread locking.',
-    outcome: 'Secured $14B in traded volume in Q1 post-launch; 99.8% client satisfaction by institutional traders.',
-    challenges: [
-      'Handling high-frequency WebSocket streams without re-rendering React subtrees',
-      'Canvas-based custom candlestick & depth order chart engine',
-      'Multi-monitor dynamic layout docking system',
-    ],
-    architecture: [
-      'Off-main-thread WebWorker data parsing with SharedArrayBuffer',
-      'High-performance HTML5 Canvas rendering pipeline',
-      'Optimistic local state updates with fallback queueing',
-    ],
-    demoUrl: '#',
-    githubUrl: '#',
-    year: '2025',
-    client: 'Stripe Network',
-  },
-  {
-    id: 'maison',
-    title: "Maison D'Art — Editorial Store",
-    category: 'Editorial',
-    subtitle: 'High-craft e-commerce storytelling experience for haute couture luxury fashion.',
-    image: '/projects/ecommerce_editorial.png',
-    tags: ['React', 'Animate.css', 'GSAP ScrollTrigger', 'Headless Shopify', 'Tailwind'],
-    summary: 'Crafted a bespoke digital flagship featuring fluid smooth scrolling, high-contrast serif typography, and interactive virtual runway fit visualizations.',
-    outcome: 'Increased AOV by +140% and boosted brand time-on-site to 4m 12s average session.',
-    challenges: [
-      'Parallax smooth scrolling on high-DPI retina mobile viewports',
-      'Progressive image loading with dynamic blurs for ultra-fast LCP',
-      'Bespoke cart interaction with magnetic micro-animations',
-    ],
-    architecture: [
-      'Headless GraphQL architecture connected to Shopify Plus',
-      'GSAP ScrollTrigger timeline management with Lenis smooth scroll',
-      'Dynamic web font subsetting for minimal render blocking',
-    ],
-    demoUrl: '#',
-    githubUrl: '#',
-    year: '2024',
-    client: 'Aesop × Vogue Studio',
-  },
-];
-
-const FILTERS = ['All', 'Healthcare', 'Gaming UI', 'Enterprise', 'Editorial'];
+import { ArrowUpRight, ArrowRight, ExternalLink, X, ChevronDown, CheckCircle, Code, ShieldCheck, Sparkles } from 'lucide-react';
+import { projects, FILTERS, type ProjectData } from '@/data/projects';
+import { ImageSkeleton } from '@/components/ui/Skeleton';
 
 function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<'overview' | 'architecture' | 'impact'>('overview');
   const [selectedImg, setSelectedImg] = useState(project.image);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setSelectedImg(project.image);
+    setImgLoaded(false);
     setActiveTab('overview');
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [project]);
@@ -236,7 +25,7 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
       ref={ref}
       className="col-span-1 md:col-span-2 rounded-3xl bg-white dark:bg-[#1E293B] border border-[#2563EB]/20 dark:border-[#2563EB]/30 shadow-2xl overflow-hidden"
     >
-      <div className="flex items-center justify-between p-5 md:px-8 bg-[#F8FAFC] dark:bg-[#0B0F17] border-b border-[#0F2C59]/10 dark:border-white/10">
+      <div className="flex items-center justify-between p-5 md:px-8 bg-[#F8FAFC] dark:bg-black border-b border-[#0F2C59]/10 dark:border-white/10">
         <div>
           <div className="flex items-center gap-3 mb-1">
             <span className="px-3 py-1 rounded-full bg-[#0F2C59]/10 dark:bg-white/10 text-[#0F2C59] dark:text-[#60A5FA] font-mono text-xs font-semibold uppercase tracking-wider">
@@ -250,7 +39,7 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
         </div>
         <button
           onClick={onClose}
-          className="p-2.5 rounded-full bg-white dark:bg-[#1E293B] border border-[#0F2C59]/15 dark:border-white/15 text-[#0F172A] dark:text-white hover:bg-[#0F2C59] hover:text-white transition-colors shrink-0 ml-4"
+          className="p-2.5 rounded-full bg-white dark:bg-[#1E293B] border border-[#0F2C59]/15 dark:border-white/15 text-[#0F172A] dark:text-white hover:bg-[#0F2C59] hover:text-white transition-colors shrink-0 ml-4 cursor-pointer"
           aria-label="Close case study"
         >
           <X className="w-5 h-5" />
@@ -258,13 +47,15 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
       </div>
 
       <div className="p-5 md:p-8 space-y-6">
-        <div className="relative w-full h-56 md:h-80 rounded-2xl overflow-hidden bg-[#0F172A] border border-[#0F2C59]/10 dark:border-white/10">
+        <div className="relative w-full h-56 md:h-80 rounded-2xl overflow-hidden bg-[#0F172A] border border-[#0F2C59]/10 dark:border-white/10 flex items-center justify-center">
+          {!imgLoaded && <ImageSkeleton />}
           <img
             src={selectedImg}
             alt={project.title}
-            className="w-full h-full object-contain md:object-cover transition-all duration-300"
+            onLoad={() => setImgLoaded(true)}
+            className={`w-full h-full object-contain transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/60 via-transparent to-transparent flex items-end p-5 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-transparent to-transparent flex items-end p-5 pointer-events-none">
             <p className="text-white text-xs md:text-sm font-light italic">"{project.subtitle}"</p>
           </div>
         </div>
@@ -274,14 +65,14 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
             {photos.map((img, idx) => (
               <button
                 key={idx}
-                onClick={() => setSelectedImg(img)}
-                className={`relative w-24 h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-200 ${
+                onClick={() => { setSelectedImg(img); setImgLoaded(false); }}
+                className={`relative w-24 h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-200 cursor-pointer bg-slate-900 ${
                   selectedImg === img
                     ? 'border-[#2563EB] ring-2 ring-[#2563EB]/30 scale-105'
                     : 'border-[#0F2C59]/10 dark:border-white/10 opacity-70 hover:opacity-100'
                 }`}
               >
-                <img src={img} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                <img src={img} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover object-top" />
               </button>
             ))}
           </div>
@@ -292,7 +83,7 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 capitalize text-sm font-medium border-b-2 transition-all ${
+              className={`pb-3 capitalize text-sm font-medium border-b-2 transition-all cursor-pointer ${
                 activeTab === tab
                   ? 'border-[#2563EB] text-[#2563EB] dark:text-[#60A5FA] font-semibold'
                   : 'border-transparent text-[#0F172A]/60 dark:text-[#F8FAFC]/60 hover:text-[#0F172A] dark:hover:text-white'
@@ -321,7 +112,7 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
         {activeTab === 'architecture' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {project.architecture.map((item, i) => (
-              <div key={i} className="p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#0B0F17] border border-[#0F2C59]/10 dark:border-white/10 flex items-start gap-3">
+              <div key={i} className="p-4 rounded-xl bg-[#F8FAFC] dark:bg-black border border-[#0F2C59]/10 dark:border-white/10 flex items-start gap-3">
                 <Code className="w-5 h-5 text-[#2563EB] dark:text-[#60A5FA] shrink-0 mt-0.5" />
                 <span className="text-xs font-mono text-[#0F172A]/80 dark:text-[#F8FAFC]/80 leading-relaxed">{item}</span>
               </div>
@@ -350,22 +141,35 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
         )}
 
         <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#0F2C59]/08 dark:border-white/10">
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             {hasDemo && (
-              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2563EB] text-white font-semibold text-xs tracking-wider hover:bg-[#0F2C59] transition-colors shadow-md">
-                Live Demo <ExternalLink className="w-3.5 h-3.5" />
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-semibold text-xs tracking-wider transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                aria-label={`Open live demo for ${project.title}`}
+              >
+                <span>{project.demoUrl?.includes('releases') ? 'Download v1' : 'Live Demo'}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
             {hasGithub && (
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#0F2C59]/15 dark:border-white/15 text-[#0F172A] dark:text-white font-semibold text-xs hover:border-[#2563EB] hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors">
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#0F2C59]/20 dark:border-white/20 text-[#0F172A] dark:text-white hover:border-[#2563EB] hover:text-[#2563EB] dark:hover:text-[#60A5FA] font-mono font-semibold text-xs transition-all active:scale-95 cursor-pointer"
+                aria-label={`View source code for ${project.title}`}
+              >
                 Source Code
               </a>
             )}
           </div>
-          <button onClick={onClose}
-            className="text-xs text-[#0F172A]/50 dark:text-[#F8FAFC]/50 hover:text-[#0F172A] dark:hover:text-white font-mono underline transition-colors">
+          <button
+            onClick={onClose}
+            className="text-xs text-[#0F172A]/60 dark:text-[#F8FAFC]/60 hover:text-[#0F172A] dark:hover:text-white font-mono underline transition-colors cursor-pointer"
+          >
             Close ↑
           </button>
         </div>
@@ -375,60 +179,113 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
 }
 
 function ProjectCard({ project, isActive, onOpen }: { project: ProjectData; isActive: boolean; onOpen: () => void }) {
+  const isMobile = project.tags.includes('Android') || project.tags.includes('Kotlin') || project.id === 'sv_music' || project.category === 'Mobile';
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   return (
     <div
-      className={`card rounded-3xl overflow-hidden flex flex-col cursor-pointer transition-all duration-300 ${isActive ? 'ring-2 ring-[#2563EB] ring-offset-2 dark:ring-offset-[#0B0F17]' : ''}`}
+      className={`card group rounded-3xl overflow-hidden flex flex-col cursor-pointer transition-all duration-300 h-full ${isActive ? 'ring-2 ring-[#2563EB] ring-offset-2 dark:ring-offset-black' : ''}`}
       onClick={onOpen}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
+      aria-expanded={isActive}
+      aria-label={`View case study for ${project.title}`}
     >
-      <div className="relative aspect-[16/9] bg-[#0F2C59]/05 dark:bg-[#1E293B]">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-        <span className="absolute top-3 left-3 badge bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-sm border-[#0F2C59]/12 text-[#0F2C59] dark:text-[#60A5FA]">
+      <div className="relative w-full h-60 sm:h-72 shrink-0 overflow-hidden bg-[#0F172A]">
+        {!imgLoaded && <ImageSkeleton />}
+        {isMobile ? (
+          <div className="relative w-full h-full flex items-center justify-center p-3 sm:p-4 bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#020617] overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center blur-2xl opacity-35 scale-125 pointer-events-none"
+              style={{ backgroundImage: `url(${project.image})` }}
+            />
+            <div className="relative h-full aspect-[9/19.5] rounded-2xl sm:rounded-2.5xl border-2 border-white/20 shadow-2xl overflow-hidden bg-black ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-105">
+              <img
+                src={project.image}
+                alt={project.title}
+                onLoad={() => setImgLoaded(true)}
+                className={`w-full h-full object-cover object-top transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <span className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono font-medium text-white/90 border border-white/10 shadow-sm">
+              Mobile App
+            </span>
+          </div>
+        ) : (
+          <div className="relative w-full h-full bg-[#0F2C59]/05 dark:bg-[#1E293B] overflow-hidden">
+            <img
+              src={project.image}
+              alt={project.title}
+              onLoad={() => setImgLoaded(true)}
+              className={`w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </div>
+        )}
+
+        <span className="absolute top-3.5 left-3.5 badge bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-md border-[#0F2C59]/12 text-[#0F2C59] dark:text-[#60A5FA] shadow-xs">
           {project.category}
         </span>
         {isActive && (
-          <div className="absolute inset-0 bg-[#2563EB]/10 flex items-center justify-center">
-            <div className="bg-[#2563EB] text-white text-xs font-mono px-3 py-1.5 rounded-full flex items-center gap-1.5">
+          <div className="absolute inset-0 bg-[#2563EB]/15 backdrop-blur-[2px] flex items-center justify-center">
+            <div className="bg-[#2563EB] text-white text-xs font-mono font-medium px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
               <ChevronDown className="w-3.5 h-3.5" /> Expanded below
             </div>
           </div>
         )}
       </div>
 
-      <div className="p-7 flex flex-col flex-1 gap-5">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-[10px] font-mono text-[#0F2C59]/45 dark:text-[#F8FAFC]/50 mb-1">{project.year} · {project.client}</p>
-            <h3 className="font-monument text-lg md:text-xl text-[#0F172A] dark:text-[#F8FAFC] leading-tight">
-              {project.title}
-            </h3>
+      <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between gap-5 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-sm">
+        <div className="space-y-3">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-wider text-[#0F2C59]/50 dark:text-[#F8FAFC]/50 mb-1">{project.year} · {project.client}</p>
+              <h3 className="font-monument text-base sm:text-lg text-[#0F172A] dark:text-[#F8FAFC] leading-snug line-clamp-2">
+                {project.title}
+              </h3>
+            </div>
+            <div className={`w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${isActive ? 'bg-[#2563EB] border-[#2563EB] text-white shadow-sm' : 'border-[#0F2C59]/10 dark:border-white/10 text-[#0F172A]/40 dark:text-[#F8FAFC]/40 group-hover:border-[#2563EB] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA]'}`}>
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
           </div>
-          <div className={`w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 mt-1 transition-colors ${isActive ? 'bg-[#2563EB] border-[#2563EB] text-white' : 'border-[#0F2C59]/10 dark:border-white/10 text-[#0F172A]/40 dark:text-[#F8FAFC]/40'}`}>
-            <ArrowUpRight className="w-4 h-4" />
-          </div>
+
+          <p className="text-xs sm:text-sm text-[#0F172A]/70 dark:text-[#F8FAFC]/70 font-light leading-relaxed line-clamp-2">
+            {project.subtitle}
+          </p>
         </div>
 
-        <p className="text-sm text-[#0F172A]/65 dark:text-[#F8FAFC]/65 font-light leading-relaxed line-clamp-2 flex-1">
-          {project.subtitle}
-        </p>
+        <div className="space-y-4 pt-2 mt-auto">
+          <div className="flex flex-wrap gap-1.5 min-h-[28px]">
+            {project.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="px-2.5 py-1 text-[10px] font-mono border border-[#0F2C59]/10 dark:border-white/10 rounded-lg text-[#0F172A]/65 dark:text-[#F8FAFC]/75 bg-[#0F2C59]/03 dark:bg-white/05">
+                {tag}
+              </span>
+            ))}
+          </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          {project.tags.slice(0, 4).map((tag) => (
-            <span key={tag} className="px-3 py-1 text-[10px] font-mono border border-[#0F2C59]/10 dark:border-white/10 rounded-lg text-[#0F172A]/60 dark:text-[#F8FAFC]/70 bg-[#0F2C59]/03 dark:bg-white/05">
-              {tag}
+          <div className="pt-3.5 border-t border-[#0F2C59]/08 dark:border-white/10 flex items-center justify-between gap-2">
+            <span className="text-xs font-mono font-semibold text-[#2563EB] dark:text-[#60A5FA] group-hover:underline">
+              {isActive ? 'Close Case Study ↑' : 'Explore Case Study →'}
             </span>
-          ))}
-        </div>
-
-        <div className="pt-4 border-t border-[#0F2C59]/06 dark:border-white/10">
-          <span className={`text-xs font-semibold underline-offset-2 ${isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'text-[#2563EB] dark:text-[#60A5FA]'}`}>
-            {isActive ? 'Close Case Study ↑' : 'Full Case Study →'}
-          </span>
+            {project.demoUrl && project.demoUrl !== '#' && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2563EB]/10 dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#60A5FA] hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] dark:hover:text-white text-[11px] font-mono font-semibold transition-colors shadow-xs"
+                aria-label={`Open live demo for ${project.title}`}
+              >
+                <span>{project.demoUrl.includes('releases') ? 'Download v1' : 'Visit Live'}</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -439,8 +296,9 @@ export const SelectedProjects = () => {
   const [filter, setFilter] = useState('All');
   const [openId, setOpenId] = useState<string | null>(null);
 
-  const filtered = filter === 'All' ? projects : projects.filter((p) => p.category === filter);
-  const openProject = projects.find((p) => p.id === openId) || null;
+  const homeProjects = projects.filter((p) => !p.hideFromHome);
+  const filtered = filter === 'All' ? homeProjects : homeProjects.filter((p) => p.category === filter);
+  const openProject = homeProjects.find((p) => p.id === openId) || null;
 
   const handleOpen = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -481,32 +339,59 @@ export const SelectedProjects = () => {
           </div>
         </div>
 
-        <div className="space-y-8">
-          {rows.map((row, rowIdx) => (
-            <div key={rowIdx}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {row.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    isActive={openId === project.id}
-                    onOpen={() => handleOpen(project.id)}
-                  />
-                ))}
-                {row.length === 1 && <div />}
-              </div>
-
-              {row.some((p) => p.id === openId) && openProject && (
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
-                  <InlineCaseStudy
-                    key={openProject.id}
-                    project={openProject}
-                    onClose={handleClose}
-                  />
-                </div>
-              )}
+        {filtered.length === 0 ? (
+          <div className="rounded-3xl border border-[#0F2C59]/10 dark:border-white/10 bg-white dark:bg-[#1E293B] p-12 md:p-16 text-center max-w-xl mx-auto shadow-xs flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#0F2C59]/05 dark:bg-white/10 flex items-center justify-center text-[#2563EB] dark:text-[#60A5FA]">
+              <Sparkles className="w-6 h-6" />
             </div>
-          ))}
+            <h3 className="font-monument text-lg md:text-xl text-[#0F172A] dark:text-[#F8FAFC]">
+              Products Coming Soon
+            </h3>
+            <p className="text-sm text-[#0F172A]/60 dark:text-[#F8FAFC]/60 font-light leading-relaxed max-w-sm">
+              Currently preparing self-built tools, templates, and micro-products for release. Check back soon!
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {rows.map((row, rowIdx) => (
+              <div key={rowIdx}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {row.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      isActive={openId === project.id}
+                      onOpen={() => handleOpen(project.id)}
+                    />
+                  ))}
+                  {row.length === 1 && <div />}
+                </div>
+
+                {row.some((p) => p.id === openId) && openProject && (
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
+                    <InlineCaseStudy
+                      key={openProject.id}
+                      project={openProject}
+                      onClose={handleClose}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-16 pt-8 border-t border-[#0F2C59]/08 dark:border-white/10 flex flex-col items-center justify-center gap-3">
+          <a
+            href="#/projects"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#0F2C59] dark:bg-[#2563EB] text-white font-mono text-xs md:text-sm font-semibold tracking-wider hover:bg-[#2563EB] dark:hover:bg-[#1D4ED8] transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
+          >
+            <span>View All Projects</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+          <p className="text-xs font-mono text-[#0F172A]/50 dark:text-[#F8FAFC]/50">
+            Explore complete archive, case studies & live demos
+          </p>
         </div>
       </div>
     </section>

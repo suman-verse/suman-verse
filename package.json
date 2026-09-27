@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "@types/canvas-confetti": "^1.9.0",
+    "@types/styled-components": "^5.1.36",
     "animate.css": "^4.1.1",
     "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
     "gsap": "^3.15.0",
     "lucide-react": "^1.27.0",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "styled-components": "^6.5.3",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

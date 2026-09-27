@@ -187,7 +187,7 @@ void main() {
         </div>
       </div>
 
-      <div className="relative z-10 my-4 font-mono text-xs md:text-sm leading-relaxed text-[#0F172A] dark:text-white bg-white/50 dark:bg-[#0B0F17]/50 backdrop-blur-md p-5 rounded-2xl border border-[#0F2C59]/10 dark:border-white/10 shadow-inner overflow-x-auto">
+      <div className="relative z-10 my-4 font-mono text-xs md:text-sm leading-relaxed text-[#0F172A] dark:text-white bg-white/50 dark:bg-black/50 backdrop-blur-md p-5 rounded-2xl border border-[#0F2C59]/10 dark:border-white/10 shadow-inner overflow-x-auto">
         <pre className="text-[#0F172A] dark:text-white">
           <code>
             {codeExamples[activeTab].split('\n').map((line, i) => (

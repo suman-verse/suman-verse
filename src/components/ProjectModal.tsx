@@ -65,7 +65,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
         className="relative w-full max-w-4xl max-h-[85vh] bg-white dark:bg-[#1E293B] rounded-3xl overflow-hidden shadow-2xl border border-[#0F2C59]/10 dark:border-white/10 flex flex-col animate__animated animate__zoomIn animate__faster"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-5 md:p-6 md:px-8 border-b border-[#0F2C59]/10 dark:border-white/10 bg-[#F8FAFC] dark:bg-[#0B0F17] shrink-0">
+        <div className="flex items-center justify-between p-5 md:p-6 md:px-8 border-b border-[#0F2C59]/10 dark:border-white/10 bg-[#F8FAFC] dark:bg-black shrink-0">
           <div>
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 rounded-full bg-[#0F2C59]/10 dark:bg-white/10 text-[#0F2C59] dark:text-[#60A5FA] font-mono text-xs font-semibold uppercase tracking-wider">
@@ -194,7 +194,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </div>
                     </div>
-                    <div className="p-3 bg-[#F8FAFC] dark:bg-[#0B0F17] border-t border-[#0F2C59]/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-[#0F172A]/70 dark:text-[#F8FAFC]/70">
+                    <div className="p-3 bg-[#F8FAFC] dark:bg-black border-t border-[#0F2C59]/10 dark:border-white/10 flex items-center justify-between text-xs font-mono text-[#0F172A]/70 dark:text-[#F8FAFC]/70">
                       <span>Screenshot #{i + 1}</span>
                       <span className="text-[#2563EB] dark:text-[#60A5FA] font-semibold">Desun Hospital UI</span>
                     </div>
@@ -213,7 +213,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 {project.architecture.map((item, i) => (
                   <div
                     key={i}
-                    className="p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#0B0F17] border border-[#0F2C59]/10 dark:border-white/10 flex items-start gap-3"
+                    className="p-4 rounded-xl bg-[#F8FAFC] dark:bg-black border border-[#0F2C59]/10 dark:border-white/10 flex items-start gap-3"
                   >
                     <Code className="w-5 h-5 text-[#2563EB] dark:text-[#60A5FA] shrink-0 mt-0.5" />
                     <span className="text-xs font-mono text-[#0F172A]/80 dark:text-[#F8FAFC]/80 leading-relaxed">{item}</span>
@@ -255,7 +255,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           )}
         </div>
 
-        <div className="p-5 md:px-8 border-t border-[#0F2C59]/10 dark:border-white/10 bg-[#F8FAFC] dark:bg-[#0B0F17] flex flex-wrap items-center justify-between gap-4 shrink-0">
+        <div className="p-5 md:px-8 border-t border-[#0F2C59]/10 dark:border-white/10 bg-[#F8FAFC] dark:bg-black flex flex-wrap items-center justify-between gap-4 shrink-0">
           <div className="flex items-center gap-4">
             {hasDemo && (
               <a

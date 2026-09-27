@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
@@ -99,7 +100,6 @@ export const Navbar = () => {
     <>
       <ScrollProgress />
 
-      {/* ─── DESKTOP NAV ─── */}
       <header className="hidden md:block fixed top-4 left-0 right-0 z-50 pointer-events-none px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex w-44" />
@@ -123,18 +123,12 @@ export const Navbar = () => {
             })}
           </nav>
 
-          <div className="pointer-events-auto flex items-center gap-2">
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/80 dark:bg-[#1E293B]/80 border border-[#0F2C59]/15 dark:border-white/10 text-[#0F172A] dark:text-white hover:border-[#2563EB] hover:text-[#2563EB] dark:hover:text-[#60A5FA] shadow-md transition-all duration-300"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-[#0F2C59]" />
-              )}
-            </button>
+          <div className="pointer-events-auto flex items-center gap-3">
+            <ThemeToggle
+              isDark={theme === 'dark'}
+              onToggle={toggleTheme}
+              className="drop-shadow-sm hover:scale-105 transition-transform"
+            />
 
             <a
               href="#contact"
@@ -147,31 +141,24 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* ─── MOBILE TOP BAR ─── */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 flex items-center justify-between bg-white/90 dark:bg-[#0B0F17]/90 backdrop-blur-md border-b border-[#0F2C59]/08 dark:border-white/08">
-        <div className="flex items-center gap-2">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 flex items-center justify-between bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-[#0F2C59]/08 dark:border-white/08">
+        <a href="#" className="flex items-center gap-2">
           <img
-            src="/favicon.png"
-            alt="Suman"
-            className="w-7 h-7 rounded-lg object-cover border border-[#0F2C59]/10 dark:border-white/10"
+            src="/logo.png"
+            alt="Suman Verse Logo"
+            className="w-7 h-7 object-contain drop-shadow-sm"
           />
-          <span className="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
-            Suman
+          <span className="text-sm font-bold font-serif text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
+            Suman Verse
           </span>
-        </div>
+        </a>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-[#F1F5F9] dark:bg-[#1E293B] border border-[#0F2C59]/10 dark:border-white/10 text-[#0F172A] dark:text-white transition-all duration-300"
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
-            ) : (
-              <Moon className="w-3.5 h-3.5 text-[#0F2C59]" />
-            )}
-          </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle
+            isDark={theme === 'dark'}
+            onToggle={toggleTheme}
+            className="drop-shadow-sm scale-90"
+          />
 
           <button
             onClick={() => setMobileOpen((o) => !o)}
@@ -183,7 +170,6 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* ─── MOBILE SLIDE-DOWN MENU ─── */}
       <div
         className={`md:hidden fixed inset-0 z-40 transition-all duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -194,7 +180,7 @@ export const Navbar = () => {
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute top-[57px] left-0 right-0 bg-white dark:bg-[#0B0F17] border-b border-[#0F2C59]/08 dark:border-white/08 shadow-2xl transition-all duration-300 ${
+          className={`absolute top-[57px] left-0 right-0 bg-white dark:bg-black border-b border-[#0F2C59]/08 dark:border-white/08 shadow-2xl transition-all duration-300 ${
             mobileOpen ? 'translate-y-0' : '-translate-y-4'
           }`}
         >

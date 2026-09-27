@@ -2,7 +2,12 @@ import { useEffect } from 'react';
 
 export function useAntiDevTools() {
   useEffect(() => {
-    const onContextMenu = (e: MouseEvent) => e.preventDefault();
+    const onContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'IMG' || target.tagName === 'CANVAS') {
+        e.preventDefault();
+      }
+    };
 
     const onKeyDown = (e: KeyboardEvent) => {
       const key = e.key;
@@ -28,7 +33,7 @@ export function useAntiDevTools() {
       if (target.tagName === 'IMG' || target.tagName === 'CANVAS') e.preventDefault();
     };
 
-    const THRESHOLD = 160;
+    const THRESHOLD = 200;
     let devToolsOpen = false;
 
     const showOverlay = () => {
@@ -54,7 +59,7 @@ export function useAntiDevTools() {
         </svg>
         <h2 style="font-size:1.5rem;font-weight:800;margin:0;letter-spacing:-0.02em">Access Restricted</h2>
         <p style="font-size:0.875rem;opacity:0.7;margin:0;max-width:300px;line-height:1.6">
-          Developer tools are not permitted on this page.<br/>Please close DevTools to continue browsing.
+          Developer tools are restricted on this page.<br/>Please close DevTools to continue browsing.
         </p>
       `;
       document.body.appendChild(overlay);
@@ -68,6 +73,7 @@ export function useAntiDevTools() {
     };
 
     const detectDevTools = () => {
+      if (window.innerWidth <= 768 || 'ontouchstart' in window) return;
       const widthDiff = window.outerWidth - window.innerWidth;
       const heightDiff = window.outerHeight - window.innerHeight;
       const opened = widthDiff > THRESHOLD || heightDiff > THRESHOLD;
@@ -81,18 +87,7 @@ export function useAntiDevTools() {
       }
     };
 
-    const detectViaDebugger = () => {
-      const start = performance.now();
-      // eslint-disable-next-line no-debugger
-      debugger;
-      if (performance.now() - start > 100) {
-        devToolsOpen = true;
-        showOverlay();
-      }
-    };
-
-    const intervalId = setInterval(detectDevTools, 800);
-    const debuggerIntervalId = setInterval(detectViaDebugger, 3000);
+    const intervalId = setInterval(detectDevTools, 1200);
 
     document.addEventListener('contextmenu', onContextMenu);
     document.addEventListener('keydown', onKeyDown);
@@ -105,7 +100,6 @@ export function useAntiDevTools() {
       document.removeEventListener('dragstart', onDragStart);
       document.removeEventListener('selectstart', onSelectStart);
       clearInterval(intervalId);
-      clearInterval(debuggerIntervalId);
       hideOverlay();
     };
   }, []);
