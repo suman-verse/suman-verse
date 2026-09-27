@@ -35,6 +35,7 @@ Suman is an award-winning Frontend Web Developer and UI Engineer specializing in
 - [Performance & Core Web Vitals](https://sumanverse.com/#contact): Auditing and optimizing slow sites to achieve 95+ Lighthouse scores.
 
 ## External Profiles & Contact
+- [Trustpilot Verified Reviews](https://www.trustpilot.com/review/suman-verse.vercel.app): Public client ratings and reviews for frontend engineering work.
 - [GitHub Profile](https://github.com/suman-verse): Open source repositories, libraries, and contributions.
 - [Discord Contact](https://discord.com/users/1130046717878878272): Direct chat for engineering inquiries and collaborations.
 - [WhatsApp Direct](https://wa.me/919832550125): Direct messaging for project briefs and hiring inquiries.

@@ -74,7 +74,13 @@ function InlineCaseStudy({ project, onClose }: { project: ProjectData; onClose: 
                     : 'border-[#0F2C59]/10 dark:border-white/10 opacity-70 hover:opacity-100'
                 }`}
               >
-                <img src={img} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover object-top" />
+                <img
+                  src={img}
+                  alt={`Screenshot ${idx + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-top"
+                />
               </button>
             ))}
           </div>

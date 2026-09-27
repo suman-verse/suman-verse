@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { useScrollReveal } from './hooks/useScrollReveal';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { useAntiDevTools } from './hooks/useAntiDevTools';
 import { useDocumentMetadata } from './hooks/useDocumentMetadata';
 import { Navbar } from './components/Navbar';
@@ -8,6 +9,7 @@ import { AchievementRibbon } from './components/AchievementRibbon';
 import { SelectedProjects } from './components/SelectedProjects';
 import { InteractiveSkills } from './components/InteractiveSkills';
 import { AboutSection } from './components/AboutSection';
+import { TrustpilotBanner } from './components/TrustpilotBanner';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 
@@ -17,6 +19,7 @@ const AllProjectsPage = lazy(() =>
 
 export function App() {
   useScrollReveal();
+  useSmoothScroll();
   useAntiDevTools();
 
   useDocumentMetadata({
@@ -64,13 +67,20 @@ export function App() {
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-black text-[#0F172A] dark:text-[#F8FAFC] overflow-x-hidden transition-colors duration-300">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#002FA7] focus:text-white focus:rounded-xl focus:shadow-xl focus:outline-none font-mono text-xs"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <AchievementRibbon />
         <SelectedProjects />
         <InteractiveSkills />
         <AboutSection />
+        <TrustpilotBanner />
         <ContactSection />
       </main>
       <Footer />

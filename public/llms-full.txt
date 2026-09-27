@@ -121,3 +121,6 @@ A: Yes. Suman works with international startups, design studios, and enterprises
 
 **Q: What is Suman's typical pricing and timeline?**  
 A: Suman accommodates projects starting from under $5k up to $25k+ enterprise solutions. Small landing pages and components typically take 3–7 business days, while full web platforms and bespoke design systems take 2–4 weeks.
+
+**Q: Where can I see verified reviews and testimonials for Suman?**  
+A: Verified client reviews are available on Trustpilot at `https://www.trustpilot.com/review/suman-verse.vercel.app` where clients can rate Suman's frontend work and share their experiences.
